@@ -1,5 +1,7 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
+import { headers } from "next/dist/client/components/headers"
+import AuthProvider, { getSession } from "@/features/AuthProvider"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
@@ -28,7 +30,9 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const session = await getSession(headers().get("cookie") ?? "")
+
   return (
     <>
       <html lang="en" suppressHydrationWarning>
@@ -39,12 +43,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <div className="h-full flex-1">{children}</div>
-            </div>
-            <TailwindIndicator />
-          </ThemeProvider>
+          <AuthProvider session={session}>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <div className="relative flex min-h-screen flex-col">
+                <div className="h-full flex-1">{children}</div>
+              </div>
+              <TailwindIndicator />
+            </ThemeProvider>
+          </AuthProvider>
         </body>
       </html>
     </>
