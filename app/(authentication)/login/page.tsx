@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { FaGoogle } from "react-icons/fa"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -13,6 +12,8 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+
+import GoogleButton from "../GoogleButton"
 
 type CardProps = React.ComponentProps<typeof Card> & { searchParams: any }
 
@@ -49,9 +50,7 @@ export default function Login({ className, ...props }: CardProps) {
             Or
           </p>
         </div>
-        <Button className="flex w-full gap-1" variant="outline">
-          <FaGoogle className="h-4 w-4" /> <span>Google</span>
-        </Button>
+        <GoogleButton />
         <div className="-mt-2 flex w-full items-center justify-center gap-2 text-sm font-extralight leading-none">
           <span>Don&rsquo;t have an account?</span>
           <Link
