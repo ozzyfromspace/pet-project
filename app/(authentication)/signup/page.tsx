@@ -62,18 +62,12 @@ export default function Signup({ className, ...props }: CardProps) {
         </Button>
         <div className="-mt-2 flex w-full items-center justify-center gap-2 text-sm font-extralight leading-none">
           <span className="-mr-3">Already have an account?</span>
-          <Button
-            variant="link"
-            className="select-none outline-none"
-            tabIndex={-1}
+          <Link
+            href="/signup"
+            className="rounded-full p-1 font-medium text-primary underline-offset-4 ring-offset-background transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
-            <Link
-              href="/login"
-              className="rounded=full ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            >
-              Sign up
-            </Link>
-          </Button>
+            Sign up
+          </Link>
         </div>
       </CardFooter>
     </Card>

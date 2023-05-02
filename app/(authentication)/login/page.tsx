@@ -53,19 +53,13 @@ export default function Login({ className, ...props }: CardProps) {
           <FaGoogle className="h-4 w-4" /> <span>Google</span>
         </Button>
         <div className="-mt-2 flex w-full items-center justify-center gap-2 text-sm font-extralight leading-none">
-          <span className="-mr-3">Don&rsquo;t have an account?</span>
-          <Button
-            variant="link"
-            className="select-none outline-none"
-            tabIndex={-1}
+          <span>Don&rsquo;t have an account?</span>
+          <Link
+            href="/signup"
+            className="rounded-full p-1 font-medium text-primary underline-offset-4 ring-offset-background transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
-            <Link
-              href="/signup"
-              className="rounded=full ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            >
-              Sign up
-            </Link>
-          </Button>
+            Sign up
+          </Link>
         </div>
       </CardFooter>
     </Card>
