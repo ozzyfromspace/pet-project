@@ -12,7 +12,7 @@ const Layout = (props: Props) => {
   return (
     <div className="flex min-h-screen max-w-7xl flex-col items-center justify-start px-3 sm:px-5 md:px-7 lg:px-10 xl:px-8 2xl:px-12">
       <AuthHeader />
-      <div className="mt-16 h-full w-full flex-1">{children}</div>
+      <div className="my-8 h-full w-full flex-1">{children}</div>
     </div>
   )
 }

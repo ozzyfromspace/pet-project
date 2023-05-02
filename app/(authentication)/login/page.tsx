@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label"
 
 type CardProps = React.ComponentProps<typeof Card> & { searchParams: any }
 
-export default function Form({ className, ...props }: CardProps) {
+export default function Login({ className, ...props }: CardProps) {
   // do not pass searchParams, per react dev warning
   const { searchParams, ...rest } = props
 
@@ -36,7 +36,7 @@ export default function Form({ className, ...props }: CardProps) {
           <Input type="email" id="email" placeholder="Email" />
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="email">Password</Label>
+          <Label htmlFor="password">Password</Label>
           <Input type="password" id="password" placeholder="Password" />
         </div>
       </CardContent>
