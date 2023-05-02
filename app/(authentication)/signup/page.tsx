@@ -1,4 +1,7 @@
+import { headers } from "next/dist/client/components/headers"
 import Link from "next/link"
+import { redirect } from "next/navigation"
+import { getSession } from "@/features/AuthProvider"
 import { FaGoogle } from "react-icons/fa"
 
 import { cn } from "@/lib/utils"
@@ -13,12 +16,24 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import isSessionValid from "@/app/isSessionValid"
 
 type CardProps = React.ComponentProps<typeof Card> & { searchParams: any }
 
-export default function Signup({ className, ...props }: CardProps) {
+function delay() {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => resolve(), 5000)
+  })
+}
+
+export default async function Signup({ className, ...props }: CardProps) {
   // do not pass searchParams, per react dev warning
   const { searchParams, ...rest } = props
+  const session = await getSession(headers().get("cookie") ?? "")
+
+  if (isSessionValid(session)) {
+    redirect("/")
+  }
 
   return (
     <Card className={cn("mx-auto w-full max-w-sm", className)} {...rest}>

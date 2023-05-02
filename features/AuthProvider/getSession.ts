@@ -1,6 +1,8 @@
 import { Session } from "next-auth"
 
-export default async function getSession(cookie: string): Promise<Session> {
+export default async function getSession(
+  cookie: string
+): Promise<Session | null> {
   const baseURL = process.env["NEXTAUTH_URL"] || "no-url"
 
   const response = await fetch(`${baseURL}/api/auth/session`, {
