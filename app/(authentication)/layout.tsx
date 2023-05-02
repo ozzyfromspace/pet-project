@@ -10,9 +10,9 @@ const Layout = (props: Props) => {
   const { children } = props
 
   return (
-    <div className="max-w-7xl px-2">
+    <div className="flex min-h-screen max-w-7xl flex-col items-center justify-start px-3 sm:px-5 md:px-7 lg:px-10 xl:px-8 2xl:px-12">
       <AuthHeader />
-      {children}
+      <div className="mt-16 h-full w-full flex-1">{children}</div>
     </div>
   )
 }
