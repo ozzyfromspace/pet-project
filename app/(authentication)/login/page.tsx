@@ -4,7 +4,6 @@ import { redirect } from "next/navigation"
 import { getSession } from "@/features/AuthProvider"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -17,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import isSessionValid from "@/app/isSessionValid"
 
+import CredentialsLoginButton from "../CredentialsLoginButton"
 import GoogleButton from "../GoogleButton"
 
 type CardProps = React.ComponentProps<typeof Card> & { searchParams: any }
@@ -51,9 +51,7 @@ export default async function Login({ className, ...props }: CardProps) {
         </div>
       </CardContent>
       <CardFooter className="grid gap-4">
-        <Button className="w-full" variant="default">
-          Sign In With Email
-        </Button>
+        <CredentialsLoginButton />
         <div>
           <p className="scroll-m-20 text-center text-base font-medium tracking-tight">
             Or

@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import isSessionValid from "@/app/isSessionValid"
 
+import CredentialsSignupButton from "../CredentialsSignupButton"
+
 type CardProps = React.ComponentProps<typeof Card> & { searchParams: any }
 
 function delay() {
@@ -64,9 +66,7 @@ export default async function Signup({ className, ...props }: CardProps) {
         </div>
       </CardContent>
       <CardFooter className="grid gap-4">
-        <Button className="w-full" variant="default">
-          Sign Up With Email
-        </Button>
+        <CredentialsSignupButton />
         <div>
           <p className="scroll-m-20 text-center text-base font-medium tracking-tight">
             Or
