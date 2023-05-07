@@ -58,7 +58,7 @@ export default async function Login({ className, ...props }: CardProps) {
           </p>
         </div>
         <GoogleButton />
-        <div className="-mt-2 flex w-full items-center justify-center gap-2 text-sm font-extralight leading-none">
+        <div className="-mt-2 flex w-full items-center justify-center gap-0.5 text-sm font-extralight leading-none">
           <span>Don&rsquo;t have an account?</span>
           <Link
             href="/signup"

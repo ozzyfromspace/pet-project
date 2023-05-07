@@ -9,6 +9,7 @@ export default async function getSession(
     headers: {
       cookie,
     },
+    cache: "no-cache",
   })
 
   const session = await response.json()
