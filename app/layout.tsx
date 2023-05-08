@@ -4,11 +4,11 @@ import MainHeader from "@/features/MainHeader/MainHeader"
 import "@/styles/globals.css"
 import { Metadata } from "next"
 
-import { TailwindIndicator } from "@/components/tailwind-indicator"
-import { ThemeProvider } from "@/components/theme-provider"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import { TailwindIndicator } from "@/components/tailwind-indicator"
+import { ThemeProvider } from "@/components/theme-provider"
 
 import AuthHeader from "./(authentication)/AuthHeader"
 import isSessionValid from "./isSessionValid"
@@ -51,8 +51,12 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <AuthProvider session={session}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
-              <div className="mx-auto h-full w-full max-w-7xl flex-1 overflow-x-clip px-2">
-                {sessionValid ? <MainHeader session={session} /> : <AuthHeader />}
+              <div className="mx-auto h-full w-full max-w-7xl flex-1">
+                {sessionValid ? (
+                  <MainHeader session={session} />
+                ) : (
+                  <AuthHeader />
+                )}
                 {children}
               </div>
             </div>
