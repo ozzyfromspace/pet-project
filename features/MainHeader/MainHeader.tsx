@@ -1,8 +1,9 @@
+import Link from "next/link"
 import { Session } from "next-auth"
 
 import DarkModeToggle from "@/components/DarkModeToggle"
 
-import { ProfileAvatar } from "./ProfileAvatar"
+import { SettingsButton } from "./SettingsButton"
 
 type MainHeaderProps = {
   session: Session
@@ -13,15 +14,15 @@ const MainHeader = (props: MainHeaderProps) => {
 
   return (
     <header className="my-2 flex w-full items-center justify-between">
-      <h1 className="w-fit scroll-m-20 text-base font-semibold tracking-tight transition-colors">
+      <Link
+        href="/"
+        className="rounded-full p-1 font-medium text-primary underline-offset-4 ring-offset-background transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      >
         PetProject
-      </h1>
+      </Link>
       <div className="flex items-center justify-between gap-2">
         <DarkModeToggle />
-        <ProfileAvatar
-          src={session.user?.image || ""}
-          initial={(session.user?.name ?? "U")[0].toUpperCase()}
-        />
+        <SettingsButton session={session} />
       </div>
     </header>
   )

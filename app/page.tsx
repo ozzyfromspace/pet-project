@@ -2,7 +2,6 @@ import { RedirectType } from "next/dist/client/components/redirect"
 import { redirect } from "next/navigation"
 import { getSession } from "@/features/AuthProvider"
 
-import TestLogout from "./TestLogout"
 import isSessionValid from "./isSessionValid"
 
 export default async function IndexPage() {
@@ -12,10 +11,5 @@ export default async function IndexPage() {
     redirect("/login", RedirectType.replace)
   }
 
-  return (
-    <section>
-      hello world
-      <TestLogout />
-    </section>
-  )
+  return <section>Welcome, {session.user?.name || "User"}</section>
 }

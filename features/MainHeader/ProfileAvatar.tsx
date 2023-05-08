@@ -9,7 +9,7 @@ export function ProfileAvatar(props: ProfileAvatarProps) {
   const { src, initial } = props
 
   return (
-    <Avatar className="h-9 w-9">
+    <Avatar className="h-full w-full">
       <AvatarImage src={src} alt="user-profile" />
       <AvatarFallback>{initial}</AvatarFallback>
     </Avatar>
