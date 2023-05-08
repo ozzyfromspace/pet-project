@@ -12,12 +12,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import isSessionValid from "@/app/isSessionValid"
 
-import CredentialsLoginButton from "../CredentialsLoginButton"
-import GoogleButton from "../GoogleButton"
+import LoginForm from "./LoginForm"
 
 type CardProps = React.ComponentProps<typeof Card> & { searchParams: any }
 
@@ -40,24 +37,10 @@ export default async function Login({ className, ...props }: CardProps) {
           Track your pets health
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid gap-4">
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="email">Email</Label>
-          <Input type="email" id="email" placeholder="Email" />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="password">Password</Label>
-          <Input type="password" id="password" placeholder="Password" />
-        </div>
+      <CardContent>
+        <LoginForm />
       </CardContent>
       <CardFooter className="grid gap-4">
-        <CredentialsLoginButton />
-        <div>
-          <p className="scroll-m-20 text-center text-base font-medium tracking-tight">
-            Or
-          </p>
-        </div>
-        <GoogleButton />
         <div className="-mt-2 flex w-full items-center justify-center gap-0.5 text-sm font-extralight leading-none">
           <span>Don&rsquo;t have an account?</span>
           <Link
