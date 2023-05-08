@@ -22,7 +22,9 @@ export function PetAvatar(props: PetAvatarProps) {
   return (
     <div
       className={`flex shrink-0 flex-col items-center justify-start gap-1 [&:first-child]:ml-4 ${
-        fullScale ? "" : "scale-[80%] opacity-80"
+        fullScale
+          ? ""
+          : "scale-[80%] opacity-50 transition-all duration-200 hover:opacity-100 focus-visible:scale-90 focus-visible:opacity-100 min-[580px]:hover:scale-90"
       }`}
     >
       <Button variant="outline" className="m-0 h-fit rounded-full p-0">
@@ -31,7 +33,7 @@ export function PetAvatar(props: PetAvatarProps) {
           <AvatarFallback className="select-none">{_fallback}</AvatarFallback>
         </Avatar>
       </Button>
-      <p className="scroll-m-20 text-sm font-normal tracking-tight">
+      <p className="scroll-m-20 text-base font-normal tracking-tight">
         {_petName}
       </p>
     </div>
