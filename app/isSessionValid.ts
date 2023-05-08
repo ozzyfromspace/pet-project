@@ -1,6 +1,8 @@
 import { Session } from "next-auth"
 
-export default function isSessionValid(session: Session | null): boolean {
+export default function isSessionValid(
+  session: Session | null
+): session is Session {
   if (session === null) return false
 
   if (session?.user === undefined) return false

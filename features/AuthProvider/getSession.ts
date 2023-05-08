@@ -1,13 +1,12 @@
+import { headers } from "next/dist/client/components/headers"
 import { Session } from "next-auth"
 
-export default async function getSession(
-  cookie: string
-): Promise<Session | null> {
+export default async function getSession(): Promise<Session | null> {
   const baseURL = process.env["NEXTAUTH_URL"] || "no-url"
 
   const response = await fetch(`${baseURL}/api/auth/session`, {
     headers: {
-      cookie,
+      cookie: headers().get("cookie") ?? "",
     },
     cache: "no-cache",
   })

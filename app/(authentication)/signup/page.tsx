@@ -1,7 +1,4 @@
-import { headers } from "next/dist/client/components/headers"
 import Link from "next/link"
-import { redirect } from "next/navigation"
-import { getSession } from "@/features/AuthProvider"
 
 import { cn } from "@/lib/utils"
 import {
@@ -12,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import isSessionValid from "@/app/isSessionValid"
 
 import SignupForm from "./SignupForm"
 
@@ -21,12 +17,6 @@ type CardProps = React.ComponentProps<typeof Card> & { searchParams: any }
 export default async function Signup({ className, ...props }: CardProps) {
   // do not pass searchParams, per react dev warning
   const { searchParams, ...rest } = props
-  const session = await getSession(headers().get("cookie") ?? "")
-
-  if (isSessionValid(session)) {
-    console.log("hit this branch")
-    redirect("/")
-  }
 
   return (
     <Card className={cn("mx-auto w-full max-w-sm", className)} {...rest}>

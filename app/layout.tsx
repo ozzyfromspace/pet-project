@@ -1,13 +1,17 @@
+import AuthProvider, { getSession } from "@/features/AuthProvider"
+import MainHeader from "@/features/MainHeader/MainHeader"
+
 import "@/styles/globals.css"
 import { Metadata } from "next"
-import { headers } from "next/dist/client/components/headers"
-import AuthProvider, { getSession } from "@/features/AuthProvider"
+import { redirect } from "next/navigation"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+
+import isSessionValid from "./isSessionValid"
 
 export const metadata: Metadata = {
   title: {
@@ -31,28 +35,33 @@ interface RootLayoutProps {
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const session = await getSession(headers().get("cookie") ?? "")
+  const session = await getSession()
+
+  if (!isSessionValid(session)) {
+    redirect("/login")
+  }
 
   return (
-    <>
-      <html lang="en" suppressHydrationWarning>
-        <head />
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
-          )}
-        >
-          <AuthProvider session={session}>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <div className="relative flex min-h-screen flex-col">
-                <div className="h-full flex-1">{children}</div>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
+        <AuthProvider session={session}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div className="relative flex min-h-screen flex-col">
+              <div className="mx-auto h-full w-full max-w-7xl flex-1 overflow-x-clip px-2">
+                <MainHeader session={session} />
+                {children}
               </div>
-              <TailwindIndicator />
-            </ThemeProvider>
-          </AuthProvider>
-        </body>
-      </html>
-    </>
+            </div>
+            <TailwindIndicator />
+          </ThemeProvider>
+        </AuthProvider>
+      </body>
+    </html>
   )
 }
