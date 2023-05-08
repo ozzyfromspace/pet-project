@@ -1,11 +1,9 @@
-import { getSession } from "@/features/AuthProvider"
 import { headers } from "next/dist/client/components/headers"
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { FaGoogle } from "react-icons/fa"
+import { getSession } from "@/features/AuthProvider"
 
-import isSessionValid from "@/app/isSessionValid"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import {
   Card,
   CardContent,
@@ -14,19 +12,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { cn } from "@/lib/utils"
+import isSessionValid from "@/app/isSessionValid"
 
-import CredentialsSignupButton from "../CredentialsSignupButton"
+import SignupForm from "./SignupForm"
 
 type CardProps = React.ComponentProps<typeof Card> & { searchParams: any }
-
-function delay() {
-  return new Promise<void>((resolve) => {
-    setTimeout(() => resolve(), 5000)
-  })
-}
 
 export default async function Signup({ className, ...props }: CardProps) {
   // do not pass searchParams, per react dev warning
@@ -34,6 +24,7 @@ export default async function Signup({ className, ...props }: CardProps) {
   const session = await getSession(headers().get("cookie") ?? "")
 
   if (isSessionValid(session)) {
+    console.log("hit this branch")
     redirect("/")
   }
 
@@ -47,32 +38,8 @@ export default async function Signup({ className, ...props }: CardProps) {
           Track your pets health
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid gap-4">
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="email">Email</Label>
-          <Input type="email" id="email" placeholder="Email" />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="password">Password</Label>
-          <Input type="password" id="password" placeholder="Password" />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="confirm-password">Confirm Password</Label>
-          <Input
-            type="password"
-            id="confirm-password"
-            placeholder="Confirm Password"
-          />
-        </div>
-        <CredentialsSignupButton />
-        <div>
-          <p className="scroll-m-20 text-center text-base font-medium tracking-tight">
-            Or
-          </p>
-        </div>
-        <Button className="flex w-full gap-1" variant="outline">
-          <FaGoogle className="h-4 w-4" /> <span>Google</span>
-        </Button>
+      <CardContent>
+        <SignupForm />
       </CardContent>
       <CardFooter className="grid gap-4">
         <div className="-mt-2 flex w-full items-center justify-center gap-0.5 text-sm font-extralight leading-none">
