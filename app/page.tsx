@@ -21,7 +21,7 @@ export default async function IndexPage() {
       <div className="mt-5">
         <ScrollArea className="w-screen">
           <div className="my-3 flex gap-4 py-2">
-            <PetAvatar src="" alt="" petName="Oliver" fallback="O" />
+            <PetAvatar src="" alt="" petName="Oliver" fallback="O" fullScale />
             <PetAvatar src="" alt="" petName="Noel" fallback="N" />
             <PetAvatar src="" alt="" petName="Hawking" fallback="H" />
             <PetAvatar src="" alt="" petName="Oliver" fallback="O" />
