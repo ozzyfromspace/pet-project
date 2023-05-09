@@ -14,10 +14,8 @@ export default async function IndexPage() {
   }
 
   return (
-    <section>
-      <div className="mt-5">
-        <PetBarDashboard pets={petBarMockData} />
-      </div>
+    <section className="pt-5">
+      <PetBarDashboard pets={petBarMockData} />
     </section>
   )
 }

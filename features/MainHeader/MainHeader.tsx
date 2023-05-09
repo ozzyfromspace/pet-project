@@ -14,14 +14,13 @@ const MainHeader = (props: MainHeaderProps) => {
   const { session } = props
 
   return (
-    <header className="my-2 flex w-full items-center justify-between px-4">
+    <header className="flex w-full flex-wrap items-center justify-between px-3 py-2">
       <Link
         href="/"
-        // className="-mx-1 rounded-full p-1 font-medium text-primary ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         className={buttonVariants({
           variant: "ghost",
           size: "sm",
-          className: "text-xl",
+          className: "px-0 text-xl",
         })}
       >
         PetProject
