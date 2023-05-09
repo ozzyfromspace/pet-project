@@ -1,26 +1,38 @@
+import { ReactNode } from "react"
+import { Tab } from "@headlessui/react"
 import { Plus } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 import { PetAvatar } from "./PetAvatar"
 
-const PetBar = () => {
+export type PetBarData = {
+  id: string
+  src: string
+  alt: string
+  name: string
+  fallback: ReactNode
+}
+
+export type PetBarProps = { pets: PetBarData[] }
+
+const PetBar = (props: PetBarProps) => {
+  const { pets } = props
+
   return (
-    <ScrollArea className="w-screen">
-      <div className="my-3 flex items-center gap-4 py-2">
-        <PetAvatar src="" alt="" petName="Oliver" fallback="O" fullScale />
-        <PetAvatar src="" alt="" petName="Noel" fallback="N" />
-        <PetAvatar src="" alt="" petName="Hawking" fallback="H" />
-        <PetAvatar src="" alt="" petName="Oliver" fallback="O" />
-        <PetAvatar src="" alt="" petName="Noel" fallback="N" />
-        <PetAvatar src="" alt="" petName="Hawking" fallback="H" />
-        <PetAvatar src="" alt="" petName="Oliver" fallback="O" />
-        <PetAvatar src="" alt="" petName="Noel" fallback="N" />
-        <PostPet />
-        <ScrollBar orientation="horizontal" className="opacity-0" />
-      </div>
-    </ScrollArea>
+    <div className="my-3 flex items-center gap-4 py-2">
+      {pets.map((pet) => (
+        <Tab key={pet.id}>
+          <PetAvatar
+            src={pet.src}
+            alt={pet.alt}
+            petName={pet.name}
+            fallback={pet.fallback}
+          />
+        </Tab>
+      ))}
+      <PostPet />
+    </div>
   )
 }
 
