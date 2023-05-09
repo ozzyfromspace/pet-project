@@ -15,25 +15,21 @@ const PetBarDashboard = (props: PetBarDashboardProps) => {
   const { pets } = props
 
   return (
-    <div>
-      <Tab.Group>
-        <div>
-          <ScrollArea className="w-screen">
-            <Tab.List>
-              <PetBar pets={pets} />
-            </Tab.List>
-            <ScrollBar orientation="horizontal" className="opacity-0" />
-          </ScrollArea>
-          <Tab.Panels>
-            {pets.map((pet) => (
-              <Tab.Panel key={pet.id} tabIndex={-1}>
-                <Dashboard />
-              </Tab.Panel>
-            ))}
-          </Tab.Panels>
-        </div>
-      </Tab.Group>
-    </div>
+    <Tab.Group>
+      <Tab.List>
+        <ScrollArea className="w-screen">
+          <PetBar pets={pets} />
+          <ScrollBar orientation="horizontal" className="opacity-0" />
+        </ScrollArea>
+      </Tab.List>
+      <Tab.Panels>
+        {pets.map((pet) => (
+          <Tab.Panel key={pet.id} tabIndex={-1}>
+            <Dashboard />
+          </Tab.Panel>
+        ))}
+      </Tab.Panels>
+    </Tab.Group>
   )
 }
 

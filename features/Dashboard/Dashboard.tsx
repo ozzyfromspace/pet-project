@@ -8,10 +8,10 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 
 const Dashboard = () => {
   return (
-    <div className="mb-8 px-2">
+    <div className="mb-8 px-3">
       <ScrollArea>
         <Tab.Group vertical>
-          <div className="min-h-80 flex h-[69vh] overflow-hidden rounded-sm border-[1px] border-slate-200 shadow-sm dark:border-slate-800">
+          <div className="flex min-h-[max(14rem,55vh)] overflow-hidden rounded-sm border-[1px] border-slate-200 shadow-sm dark:border-slate-800">
             <Tab.List className="flex flex-col gap-3 bg-gray-100 p-2 dark:bg-gray-900">
               <DashboardTab>Tab 1</DashboardTab>
               <DashboardTab>Tab 2</DashboardTab>
@@ -43,7 +43,7 @@ const DashboardTab = (props: DashboardTabProps) => {
       className={buttonVariants({
         variant: "secondary",
         className:
-          "inline-flex items-center justify-center whitespace-nowrap rounded-sm border-[1px] border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-900 ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm dark:border-slate-700 dark:text-slate-200",
+          "inline-flex items-center justify-center whitespace-nowrap rounded-sm border-[1px] border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-900 ring-offset-background transition-all duration-200 hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm dark:border-slate-700 dark:text-slate-200 dark:hover:bg-gray-800",
       })}
     >
       {children}

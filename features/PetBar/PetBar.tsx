@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 import { Tab } from "@headlessui/react"
 import { Plus } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 
 import { PetAvatar } from "./PetAvatar"
 
@@ -20,10 +20,18 @@ const PetBar = (props: PetBarProps) => {
   const { pets } = props
 
   return (
-    <div className="my-3 flex items-center gap-4 py-2">
+    <div className="my-1 flex items-center gap-3 py-2">
       {pets.map((pet) => (
-        <Tab key={pet.id}>
+        <Tab
+          key={pet.id}
+          as="button"
+          className={buttonVariants({
+            variant: "outline",
+            className: "group m-0 h-fit p-0 [&:first-child]:ml-3",
+          })}
+        >
           <PetAvatar
+            fullScale={pet.name === "Oliver"}
             src={pet.src}
             alt={pet.alt}
             petName={pet.name}
