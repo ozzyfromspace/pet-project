@@ -6,6 +6,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 import PetBar, { PetBarData } from "../PetBar/PetBar"
 import Dashboard from "./Dashboard"
+import mockPetData from "./mockPetData"
 
 export type PetBarDashboardProps = {
   pets: PetBarData[]
@@ -25,7 +26,11 @@ const PetBarDashboard = (props: PetBarDashboardProps) => {
       <Tab.Panels>
         {pets.map((pet) => (
           <Tab.Panel key={pet.id} tabIndex={-1}>
-            <Dashboard />
+            <Dashboard
+              profile={mockPetData.profile}
+              medications={[]}
+              logs={{}}
+            />
           </Tab.Panel>
         ))}
       </Tab.Panels>
