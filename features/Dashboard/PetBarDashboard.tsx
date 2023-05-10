@@ -18,7 +18,7 @@ const PetBarDashboard = (props: PetBarDashboardProps) => {
   return (
     <Tab.Group>
       <Tab.List>
-        <ScrollArea className="w-screen">
+        <ScrollArea className="w-full">
           <PetBar pets={pets} />
           <ScrollBar orientation="horizontal" className="opacity-0" />
         </ScrollArea>
