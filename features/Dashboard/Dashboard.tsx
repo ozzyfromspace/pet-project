@@ -71,7 +71,7 @@ const Dashboard = (props: DashboardProps) => {
       <ScrollArea>
         <Tab.Group vertical={firstRender ? true : isBigDashboard}>
           <div className="flex min-h-[max(14rem,55vh)] flex-col overflow-hidden rounded-sm border-[1px] border-slate-200 shadow-sm dark:border-slate-800 min-[580px]:flex-row">
-            <Tab.List className="flex flex-row gap-3 bg-gray-100 p-2 dark:bg-gray-900 min-[580px]:flex-col">
+            <Tab.List className="flex flex-row gap-3 bg-slate-50 p-2 dark:bg-slate-900 min-[580px]:flex-col">
               <DashboardTab>Profile</DashboardTab>
               <DashboardTab>Meds</DashboardTab>
               <DashboardTab>Logs</DashboardTab>
