@@ -20,11 +20,11 @@ const PetBar = (props: PetBarProps) => {
   const { pets } = props
 
   return (
-    <div className="my-1 flex items-center gap-3 py-2">
+    <section className="my-1 flex items-center gap-3 py-2">
       {pets.map((pet) => (
         <Tab
           key={pet.id}
-          as="button"
+          // as="button"
           className={buttonVariants({
             variant: "outline",
             className: "group m-0 h-fit p-0 [&:first-child]:ml-3",
@@ -40,7 +40,7 @@ const PetBar = (props: PetBarProps) => {
         </Tab>
       ))}
       <PostPet />
-    </div>
+    </section>
   )
 }
 

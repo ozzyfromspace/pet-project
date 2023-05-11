@@ -67,7 +67,7 @@ const Dashboard = (props: DashboardProps) => {
   })
 
   return (
-    <div className="mb-8 px-3">
+    <main className="mb-8 px-3">
       <ScrollArea>
         <Tab.Group vertical={firstRender ? true : isBigDashboard}>
           <div className="flex min-h-[max(14rem,55vh)] flex-col overflow-hidden rounded-sm border-[1px] border-slate-200 shadow-sm dark:border-slate-800 min-[580px]:flex-row">
@@ -86,7 +86,7 @@ const Dashboard = (props: DashboardProps) => {
           </div>
         </Tab.Group>
       </ScrollArea>
-    </div>
+    </main>
   )
 }
 

@@ -42,19 +42,19 @@ const DashboardProfile = (props: DashboardProfileProps) => {
         <Label htmlFor="name" className="flex items-center justify-end">
           Full Name
         </Label>
-        <DashboardProfileInput {...register("name")} />
-        <Label htmlFor="username" className="flex items-center justify-end">
+        <DashboardProfileInput id="name" {...register("name")} />
+        <Label htmlFor="birthdate" className="flex items-center justify-end">
           Birthdate
         </Label>
-        <DateInput timestamp={profile.dob} />
-        <Label htmlFor="username" className="flex items-center justify-end">
+        <DateInput id="birthdate" timestamp={profile.dob} />
+        <Label htmlFor="gender" className="flex items-center justify-end">
           Gender
         </Label>
-        <GenderSelect />
-        <Label htmlFor="username" className="flex items-center justify-end">
+        <GenderSelect id="gender" />
+        <Label htmlFor="species" className="flex items-center justify-end">
           Species
         </Label>
-        <DashboardProfileInput {...register("species")} />
+        <DashboardProfileInput {...register("species")} id="species" />
       </div>
     </form>
   )
@@ -64,10 +64,11 @@ export default DashboardProfile
 
 type DateInputProps = {
   timestamp: string
+  id?: string
 }
 
 function DateInput(props: DateInputProps) {
-  const { timestamp } = props
+  const { timestamp, id } = props
   const [date, setDate] = useState<Date | undefined>(() =>
     timestamp ? new Date(timestamp) : undefined
   )
@@ -76,6 +77,7 @@ function DateInput(props: DateInputProps) {
     <Popover>
       <PopoverTrigger asChild>
         <Button
+          id={id}
           variant={"outline"}
           className={cn(
             "w-full max-w-sm justify-start text-left font-normal",
@@ -98,10 +100,18 @@ function DateInput(props: DateInputProps) {
   )
 }
 
-function GenderSelect() {
+type GenderSelectProps = {
+  id?: string
+}
+
+function GenderSelect(props: GenderSelectProps) {
+  const { id } = props
+
   return (
     <Select>
       <SelectTrigger
+        id={id}
+        aria-label="Select a gender"
         className={buttonVariants({
           variant: "outline",
           className:
@@ -126,8 +136,6 @@ const DashboardProfileInput = forwardRef<HTMLInputElement, InputProps>(
     return (
       <Input
         ref={ref}
-        id="name"
-        defaultValue="Pedro Duarte"
         className={buttonVariants({
           variant: "outline",
           className:

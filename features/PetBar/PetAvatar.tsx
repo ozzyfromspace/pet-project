@@ -23,7 +23,7 @@ export function PetAvatar(props: PetAvatarProps) {
       className={`flex shrink-0 flex-col items-center justify-start gap-1 ${
         fullScale
           ? ""
-          : "scale-[80%] opacity-50 transition-all duration-200 group-hover:opacity-100 group-focus-visible:scale-90 group-focus-visible:opacity-100 min-[580px]:group-hover:scale-90"
+          : "scale-[80%] opacity-80 transition-all duration-200 group-hover:opacity-100 group-focus-visible:scale-90 group-focus-visible:opacity-100 min-[580px]:group-hover:scale-90"
       }`}
     >
       <Avatar className="h-20 w-20">
