@@ -17,12 +17,12 @@ const PetBarDashboard = (props: PetBarDashboardProps) => {
 
   return (
     <Tab.Group>
-      <Tab.List>
-        <ScrollArea className="w-full">
+      <ScrollArea className="w-full">
+        <Tab.List>
           <PetBar pets={pets} />
           <ScrollBar orientation="horizontal" className="opacity-0" />
-        </ScrollArea>
-      </Tab.List>
+        </Tab.List>
+      </ScrollArea>
       <Tab.Panels>
         {pets.map((pet) => (
           <Tab.Panel key={pet.id} tabIndex={-1}>

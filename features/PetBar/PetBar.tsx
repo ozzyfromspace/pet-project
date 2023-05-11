@@ -50,6 +50,7 @@ function PostPet() {
   return (
     <div className="flex shrink-0 scale-[80%] flex-col items-center justify-start gap-1 transition-all duration-200 focus-visible:scale-90 min-[580px]:hover:scale-90">
       <Button
+        role="tab"
         variant="outline"
         className="mr-4 aspect-square h-20 w-20 rounded-full p-0"
       >

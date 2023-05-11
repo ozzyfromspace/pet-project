@@ -23,7 +23,11 @@ export function SettingsButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="aspect-square rounded-full p-0">
+        <Button
+          variant="outline"
+          className="aspect-square rounded-full p-0"
+          aria-label="Settings"
+        >
           <Settings />
         </Button>
       </DropdownMenuTrigger>
