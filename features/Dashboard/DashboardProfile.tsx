@@ -1,6 +1,6 @@
 import { forwardRef, useState } from "react"
 import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
+import { Calendar as CalendarIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 
 import { cn } from "@/lib/utils"

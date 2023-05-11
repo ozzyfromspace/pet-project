@@ -12,14 +12,9 @@ import {
 
 import SignupForm from "./SignupForm"
 
-type CardProps = React.ComponentProps<typeof Card> & { searchParams: any }
-
-export default async function Signup({ className, ...props }: CardProps) {
-  // do not pass searchParams, per react dev warning
-  const { searchParams, ...rest } = props
-
+export default function Signup() {
   return (
-    <Card className={cn("mx-auto w-full max-w-sm", className)} {...rest}>
+    <Card className={cn("mx-auto w-full max-w-sm")}>
       <CardHeader>
         <CardTitle className="scroll-m-20 border-b pb-2 text-3xl font-medium tracking-tight transition-colors first:mt-0">
           Sign Up

@@ -1,6 +1,5 @@
 import Link from "next/link"
 
-import { cn } from "@/lib/utils"
 import {
   Card,
   CardContent,
@@ -9,17 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
 import LoginForm from "./LoginForm"
 
-type CardProps = React.ComponentProps<typeof Card> & { searchParams: any }
-
-export default async function Login({ className, ...props }: CardProps) {
-  // do not pass searchParams, per react dev warning
-  const { searchParams, ...rest } = props
-
+export default function Login() {
   return (
-    <Card className={cn("mx-auto w-full max-w-sm", className)} {...rest}>
+    <Card className={cn("mx-auto w-full max-w-sm")}>
       <CardHeader>
         <CardTitle className="scroll-m-20 border-b pb-2 text-3xl font-medium tracking-tight transition-colors first:mt-0">
           Sign In
