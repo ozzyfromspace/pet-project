@@ -51,7 +51,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <AuthProvider session={session}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="mx-auto min-h-screen max-w-7xl">
-              {sessionValid ? <MainHeader session={session} /> : <AuthHeader />}
+              {sessionValid ? <MainHeader /> : <AuthHeader />}
               {children}
             </div>
             <TailwindIndicator />

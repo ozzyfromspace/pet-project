@@ -6,7 +6,6 @@ import {
   Share,
   User,
 } from "lucide-react"
-import { Session } from "next-auth"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -20,23 +19,12 @@ import {
 } from "@/components/ui/dropdown-menu"
 import LogoutButton from "@/app/LogoutButton"
 
-import { ProfileAvatar } from "./ProfileAvatar"
-
-type SettingsButtonProps = {
-  session: Session
-}
-
-export function SettingsButton(props: SettingsButtonProps) {
-  const { session } = props
-
+export function SettingsButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="aspect-square rounded-full p-0">
-          <ProfileAvatar
-            src={session.user?.image || ""}
-            initial={(session.user?.name ?? "U")[0].toUpperCase()}
-          />
+          <Settings />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
