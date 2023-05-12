@@ -14,6 +14,36 @@ const nextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: '/api/test',
+        headers: [
+          {
+            key: 'x-custom-header',
+            value: 'my custom header value',
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://www.google.com',
+          },
+        ],
+      },
+      {
+        source: '/api/auth/session',
+        headers: [
+          {
+            key: 'x-custom-header',
+            value: 'my custom header value',
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://www.google.com',
+          },
+        ],
+      },
+    ];
+  },
 }
 
 export default nextConfig

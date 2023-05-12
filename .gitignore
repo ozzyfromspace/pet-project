@@ -16,6 +16,8 @@ build
 # misc
 .DS_Store
 *.pem
+*.rest
+*.http
 
 # debug
 npm-debug.log*
