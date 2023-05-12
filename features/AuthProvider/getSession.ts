@@ -11,8 +11,6 @@ export default async function getSession(): Promise<Session | null> {
     cache: "no-cache",
   })
 
-  console.log({ headers: headers().get("cookie") ?? "" })
-
   const session = await response.json()
 
   return Object.keys(session).length > 0 ? session : null

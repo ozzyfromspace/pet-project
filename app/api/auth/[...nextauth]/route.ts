@@ -3,12 +3,12 @@ import {
   mongoDBAdapterOptions,
 } from "@/features/AuthProvider"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
-import NextAuth from "next-auth"
+import NextAuth, { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 
 import CustomProvider from "@/app/(authentication)/customProviders"
 
-export default NextAuth({
+export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
@@ -26,4 +26,8 @@ export default NextAuth({
     signIn: "/login",
   },
   secret: process.env["JWT_SECRET"],
-})
+}
+
+const handler = NextAuth(authOptions)
+
+export { handler as GET, handler as POST }
