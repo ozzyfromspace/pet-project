@@ -25,7 +25,7 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: "/login",
   },
-  secret: process.env["JWT_SECRET"],
+  secret: process.env["NEXTAUTH_SECRET"],
 }
 
 const handler = NextAuth(authOptions)
