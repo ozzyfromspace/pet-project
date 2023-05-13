@@ -1,5 +1,8 @@
 import Link from "next/link"
+import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth"
 
+import { cn } from "@/lib/utils"
 import {
   Card,
   CardContent,
@@ -8,11 +11,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 
 import LoginForm from "./LoginForm"
 
-export default function Login() {
+export default async function Login() {
+  const session = await getServerSession(authOptions)
+
+  if (session) {
+    redirect("/")
+  }
+
   return (
     <Card className={cn("mx-auto w-full max-w-sm")}>
       <CardHeader>

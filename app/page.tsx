@@ -1,19 +1,19 @@
 import { headers } from "next/dist/client/components/headers"
-import { RedirectType } from "next/dist/client/components/redirect"
 import { redirect } from "next/navigation"
-import { getSession } from "@/features/AuthProvider"
 import PetBarDashboard from "@/features/Dashboard/PetBarDashboard"
+import MainHeader from "@/features/MainHeader"
 import { petBarMockData } from "@/features/PetBar/petBarMockData"
+import { getServerSession } from "next-auth"
 
 import ExpButton from "./ExpButton"
 import GoButton from "./GoButton"
-import isSessionValid from "./isSessionValid"
+import { authOptions } from "./api/auth/[...nextauth]/route"
 
 export default async function IndexPage() {
-  const session = await getSession()
+  const session = await getServerSession(authOptions)
 
-  if (!isSessionValid(session)) {
-    redirect("/login", RedirectType.replace)
+  if (!session) {
+    redirect("/login?callbackUrl=/")
   }
 
   const cookie = headers().get("cookie") ?? ""
@@ -22,6 +22,7 @@ export default async function IndexPage() {
     <section className="pt-5">
       <GoButton cookie={cookie} />
       <ExpButton />
+      <MainHeader />
       <PetBarDashboard pets={petBarMockData} />
     </section>
   )

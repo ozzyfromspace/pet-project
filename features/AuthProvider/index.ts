@@ -1,8 +1,6 @@
 import AuthProvider from "./AuthProvider"
-import getSession from "./getSession"
 import mongoClientPromise from "./mongoClientPromise"
 import mongoDBAdapterOptions from "./mongoDBAdapterOptions"
 
-export { getSession, mongoClientPromise, mongoDBAdapterOptions }
-
+export { mongoClientPromise, mongoDBAdapterOptions }
 export default AuthProvider
