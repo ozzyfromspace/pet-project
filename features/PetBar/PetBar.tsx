@@ -29,13 +29,15 @@ const PetBar = (props: PetBarProps) => {
             className: "group m-0 h-fit p-0 [&:first-child]:ml-3",
           })}
         >
-          <PetAvatar
-            fullScale={pet.name === "Oliver"}
-            src={pet.src}
-            alt={pet.alt}
-            petName={pet.name}
-            fallback={pet.fallback}
-          />
+          {({ selected }) => (
+            <PetAvatar
+              fullScale={selected}
+              src={pet.src}
+              alt={pet.alt}
+              petName={pet.name}
+              fallback={pet.fallback}
+            />
+          )}
         </Tab>
       ))}
       <PostPet />

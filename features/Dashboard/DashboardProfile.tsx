@@ -39,14 +39,14 @@ const DashboardProfile = (props: DashboardProfileProps) => {
   return (
     <form>
       <div className="grid grid-cols-[auto,1fr] gap-2">
-        <Label htmlFor="name" className="flex items-center justify-end">
+        <Label htmlFor="fullname" className="flex items-center justify-end">
           Full Name
         </Label>
-        <DashboardProfileInput id="name" {...register("name")} />
+        <DashboardProfileInput id="fullname" {...register("fullname")} />
         <Label htmlFor="birthdate" className="flex items-center justify-end">
           Birthdate
         </Label>
-        <DateInput id="birthdate" timestamp={profile.dob} />
+        <DateInput id="birthdate" timestamp={profile.birthdate} />
         <Label htmlFor="gender" className="flex items-center justify-end">
           Gender
         </Label>
@@ -80,7 +80,7 @@ function DateInput(props: DateInputProps) {
           id={id}
           variant={"outline"}
           className={cn(
-            "w-full max-w-sm justify-start text-left font-normal",
+            "w-full justify-start text-left font-normal",
             date && "text-muted-foreground"
           )}
         >
@@ -115,7 +115,7 @@ function GenderSelect(props: GenderSelectProps) {
         className={buttonVariants({
           variant: "outline",
           className:
-            "flex max-w-sm cursor-pointer justify-between text-sm font-normal text-muted-foreground transition-colors duration-200 hover:text-gray-800 focus-visible:cursor-text focus-visible:text-gray-800 dark:hover:text-gray-50 dark:focus-visible:text-gray-50",
+            "flex cursor-pointer justify-between text-sm font-normal text-muted-foreground transition-colors duration-200 hover:text-gray-800 focus-visible:cursor-text focus-visible:text-gray-800 dark:hover:text-gray-50 dark:focus-visible:text-gray-50",
         })}
       >
         <SelectValue placeholder="Select a gender" />
@@ -139,7 +139,7 @@ const DashboardProfileInput = forwardRef<HTMLInputElement, InputProps>(
         className={buttonVariants({
           variant: "outline",
           className:
-            "max-w-sm cursor-pointer text-sm font-normal text-muted-foreground transition-colors duration-200 hover:text-gray-800 focus-visible:cursor-text focus-visible:text-gray-800 dark:hover:text-gray-50 dark:focus-visible:text-gray-50",
+            "cursor-pointer text-sm font-normal text-muted-foreground transition-colors duration-200 hover:text-gray-800 focus-visible:cursor-text focus-visible:text-gray-800 dark:hover:text-gray-50 dark:focus-visible:text-gray-50",
         })}
         {...props}
       />

@@ -15,7 +15,7 @@ export function PetAvatar(props: PetAvatarProps) {
 
   const _alt = alt || "pet"
   const _src = src || ""
-  const _fallback = fallback ?? "P"
+  const _fallback = fallback ?? ""
   const _petName = petName || "Pet"
 
   return (

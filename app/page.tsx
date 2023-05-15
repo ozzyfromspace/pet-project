@@ -19,8 +19,6 @@ export default async function IndexPage() {
   const res = await goServerFetch("/pets")
   const { pets } = (await res.json()) as { pets: ServerPetProfile[] }
 
-  console.log({ pets })
-
   return (
     <section className="pt-5">
       <MainHeader />
