@@ -16,12 +16,10 @@ export default async function IndexPage() {
   }
 
   const cookie = headers().get("cookie") ?? ""
-  const GO_SERVER_URL =
-    process.env["GO_SERVER_URL"] || "http://no-go-server-url-was-provided"
 
   return (
     <section className="pt-5">
-      <GoButton cookie={cookie} baseURL={GO_SERVER_URL} />
+      <GoButton cookie={cookie} />
       <MainHeader />
       <PetBarDashboard pets={petBarMockData} />
     </section>

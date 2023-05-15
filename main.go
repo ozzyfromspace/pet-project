@@ -24,7 +24,7 @@ func main() {
 
 	pa := petapi.New(db)
 
-	v1.POST("/create-pet", pa.CreatePetHandler).OPTIONS("/create-pet")
+	v1.POST("/pet", pa.CreatePetHandler).OPTIONS("/pet")
 	v1.GET("/pets", pa.GetPetsHandler).OPTIONS("/pets")
 
 	log.Fatal(r.Run(":8080"))
