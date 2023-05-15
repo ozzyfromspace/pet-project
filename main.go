@@ -8,6 +8,7 @@ import (
 	"github.com/ozzyfromspace/pet-project/server/database"
 	envloader "github.com/ozzyfromspace/pet-project/server/env_loader"
 	"github.com/ozzyfromspace/pet-project/server/nextauth"
+	"github.com/ozzyfromspace/pet-project/server/petapi"
 )
 
 func main() {
@@ -26,6 +27,10 @@ func main() {
 		session, _ := ctx.Get("session")
 		ctx.JSON(http.StatusOK, gin.H{"data": session})
 	}).OPTIONS("/")
+
+	pa := petapi.New(db)
+
+	v1.POST("/create-pet", pa.CreatePetHandler).OPTIONS("/create-pet")
 
 	log.Fatal(r.Run(":8080"))
 }

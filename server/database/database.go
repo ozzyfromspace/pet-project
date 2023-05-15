@@ -2,7 +2,6 @@ package database
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 	"time"
@@ -11,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-type adapter struct {
+type Adapter struct {
 	dbUri        string
 	client       *mongo.Client
 	app_database string
@@ -19,15 +18,15 @@ type adapter struct {
 
 var connected = false
 
-func NewDatabase() *adapter {
+func NewDatabase() *Adapter {
 
-	return &adapter{
+	return &Adapter{
 		dbUri:        os.Getenv("MONGODB_URI"),
 		app_database: os.Getenv("APP_DATABASE"),
 	}
 }
 
-func (db *adapter) Connect() {
+func (db *Adapter) Connect() {
 	if connected {
 		log.Fatal("database is already connected")
 		return
@@ -49,10 +48,8 @@ func (db *adapter) Connect() {
 	}
 }
 
-func (db *adapter) Create(collection string, newDoc interface{}) {
+func (db *Adapter) Create(collection string, newDoc interface{}) (*mongo.InsertOneResult, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
 	defer cancel()
-	returnedColl := db.client.Database(db.app_database).Collection(collection)
-	a, b := returnedColl.InsertOne(ctx, newDoc)
-	fmt.Print(a, b)
+	return db.client.Database(db.app_database).Collection(collection).InsertOne(ctx, newDoc)
 }
