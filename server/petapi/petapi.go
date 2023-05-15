@@ -17,6 +17,13 @@ type petApi struct {
 
 type UserPermissions map[string]string
 
+type PetImageData struct {
+	Src    string `json:"src" bson:"src"`
+	Alt    string `json:"alt" bson:"alt"`
+	Width  int    `json:"width" bson:"width"`
+	Height int    `json:"height" bson:"height"`
+}
+
 type pet struct {
 	ID        primitive.ObjectID `json:"_id" bson:"_id,omitempty"`
 	Owner     string             `json:"owner" bson:"owner"`
@@ -24,6 +31,7 @@ type pet struct {
 	Birthdate string             `json:"birthdate" bson:"birthdate"`
 	Gender    string             `json:"gender" bson:"gender"`
 	Species   string             `json:"species" bson:"species"`
+	ImageData PetImageData       `json:"imageData" bson:"imageData"`
 }
 
 const (
@@ -71,5 +79,5 @@ func (p *petApi) GetPetsHandler(ctx *gin.Context) {
 	foundPets := []pet{}
 	result.All(context.Background(), &foundPets)
 
-	ctx.JSON(http.StatusOK, gin.H{"msg": foundPets})
+	ctx.JSON(http.StatusOK, gin.H{"pets": foundPets})
 }

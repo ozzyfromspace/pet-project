@@ -26,8 +26,6 @@ const GoAuthProvider = (props: GoAuthProviderProps) => {
         process.env["NEXT_PUBLIC_GO_SERVER_URL"] ||
         "http://no-go-server-url-was-provided"
 
-      // const cookie = headers().get("cookie") ?? ""
-
       const authorizedInit = {
         headers: {
           Authorization: `__next-auth-token__ ${cookie}`,

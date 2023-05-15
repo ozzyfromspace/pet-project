@@ -24,7 +24,6 @@ const PetBar = (props: PetBarProps) => {
       {pets.map((pet) => (
         <Tab
           key={pet.id}
-          // as="button"
           className={buttonVariants({
             variant: "outline",
             className: "group m-0 h-fit p-0 [&:first-child]:ml-3",

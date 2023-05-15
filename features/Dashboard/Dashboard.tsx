@@ -11,9 +11,9 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import DashboardProfile from "./DashboardProfile"
 
 export type PetProfile = {
-  name: string
-  dob: string
-  sex: "MALE" | "FEMALE"
+  fullname: string
+  birthdate: string
+  gender: string
   species: string
 }
 

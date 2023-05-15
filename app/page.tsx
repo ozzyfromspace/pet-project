@@ -1,8 +1,11 @@
 import { redirect } from "next/navigation"
-import PetBarDashboard from "@/features/Dashboard/PetBarDashboard"
+import PetBarDashboard, {
+  ServerPetProfile,
+} from "@/features/Dashboard/PetBarDashboard"
 import MainHeader from "@/features/MainHeader"
-import { petBarMockData } from "@/features/PetBar/petBarMockData"
 import { getServerSession } from "next-auth"
+
+import goServerFetch from "@/lib/goServerfetch"
 
 import { authOptions } from "./api/auth/[...nextauth]/route"
 
@@ -13,10 +16,15 @@ export default async function IndexPage() {
     redirect("/login?callbackUrl=/")
   }
 
+  const res = await goServerFetch("/pets")
+  const { pets } = (await res.json()) as { pets: ServerPetProfile[] }
+
+  console.log({ pets })
+
   return (
     <section className="pt-5">
       <MainHeader />
-      <PetBarDashboard pets={petBarMockData} />
+      <PetBarDashboard pets={pets} />
     </section>
   )
 }
