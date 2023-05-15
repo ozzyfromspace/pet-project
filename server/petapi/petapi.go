@@ -1,11 +1,13 @@
 package petapi
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ozzyfromspace/pet-project/server/database"
 	"github.com/ozzyfromspace/pet-project/server/nextauth"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -16,12 +18,12 @@ type petApi struct {
 type UserPermissions map[string]string
 
 type pet struct {
-	ID              primitive.ObjectID `json:"_id" bson:"-"`
-	UserPermissions UserPermissions    `json:"userPermissions" bson:"userPermissions"`
-	Fullname        string             `json:"fullname" bson:"fullname"`
-	Birthdate       string             `json:"birthdate" bson:"birthdate"`
-	Gender          string             `json:"gender" bson:"gender"`
-	Species         string             `json:"species" bson:"species"`
+	ID        primitive.ObjectID `json:"_id" bson:"_id,omitempty"`
+	Owner     string             `json:"owner" bson:"owner"`
+	Fullname  string             `json:"fullname" bson:"fullname"`
+	Birthdate string             `json:"birthdate" bson:"birthdate"`
+	Gender    string             `json:"gender" bson:"gender"`
+	Species   string             `json:"species" bson:"species"`
 }
 
 const (
@@ -37,12 +39,7 @@ func New(db *database.Adapter) *petApi {
 }
 
 func (p *petApi) CreatePetHandler(ctx *gin.Context) {
-	session, found := ctx.Get("session")
-
-	if !found {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"msg": "could not retrieve session"})
-		return
-	}
+	session, _ := ctx.Get("session")
 
 	newPet := &pet{}
 	if err := ctx.BindJSON(newPet); err != nil {
@@ -50,11 +47,7 @@ func (p *petApi) CreatePetHandler(ctx *gin.Context) {
 		return
 	}
 
-	userEmail := session.(*nextauth.NextAuthSession).User.Email
-	newPet.UserPermissions = UserPermissions{}
-
-	newPet.UserPermissions[userEmail] = Owner
-
+	newPet.Owner = session.(*nextauth.NextAuthSession).User.Email
 	result, err := p.db.Create("pets", newPet)
 
 	if err != nil {
@@ -64,14 +57,19 @@ func (p *petApi) CreatePetHandler(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, gin.H{"msg": result})
 }
 
-func (p *petApi) GetPets(ctx *gin.Context) {
-	// 	session, found :=
-	//
-	// 	result, err := p.db.Create("pets", newPet)
-	//
-	// 	if err != nil {
-	// 		ctx.JSON(http.StatusInternalServerError, gin.H{"msg": "failed to create pet"})
-	// 	}
-	//
-	// 	ctx.JSON(http.StatusCreated, gin.H{"msg": result})
+func (p *petApi) GetPetsHandler(ctx *gin.Context) {
+	session, _ := ctx.Get("session")
+	emailAddress := session.(*nextauth.NextAuthSession).User.Email
+
+	filter := bson.D{{Key: "owner", Value: emailAddress}}
+	result, err := p.db.Get("pets", filter)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"msg": "failed to get pets"})
+	}
+
+	foundPets := []pet{}
+	result.All(context.Background(), &foundPets)
+
+	ctx.JSON(http.StatusCreated, gin.H{"msg": foundPets})
 }

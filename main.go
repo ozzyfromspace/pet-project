@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ozzyfromspace/pet-project/server/database"
@@ -23,14 +22,10 @@ func main() {
 	nar := nextauth.NewRequester()
 	v1.Use(nar.ApplyNextAuthHeaders, nar.GetSessionMiddleware)
 
-	v1.GET("/", func(ctx *gin.Context) {
-		session, _ := ctx.Get("session")
-		ctx.JSON(http.StatusOK, gin.H{"data": session})
-	}).OPTIONS("/")
-
 	pa := petapi.New(db)
 
 	v1.POST("/create-pet", pa.CreatePetHandler).OPTIONS("/create-pet")
+	v1.GET("/pets", pa.GetPetsHandler).OPTIONS("/pets")
 
 	log.Fatal(r.Run(":8080"))
 }

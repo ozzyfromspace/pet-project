@@ -53,3 +53,9 @@ func (db *Adapter) Create(collection string, newDoc interface{}) (*mongo.InsertO
 	defer cancel()
 	return db.client.Database(db.app_database).Collection(collection).InsertOne(ctx, newDoc)
 }
+
+func (db *Adapter) Get(collection string, filter interface{}) (*mongo.Cursor, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
+	defer cancel()
+	return db.client.Database(db.app_database).Collection(collection).Find(ctx, filter)
+}
