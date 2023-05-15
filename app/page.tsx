@@ -4,7 +4,6 @@ import MainHeader from "@/features/MainHeader"
 import { petBarMockData } from "@/features/PetBar/petBarMockData"
 import { getServerSession } from "next-auth"
 
-import GoButton from "./GoButton"
 import { authOptions } from "./api/auth/[...nextauth]/route"
 
 export default async function IndexPage() {
@@ -16,7 +15,6 @@ export default async function IndexPage() {
 
   return (
     <section className="pt-5">
-      <GoButton />
       <MainHeader />
       <PetBarDashboard pets={petBarMockData} />
     </section>
