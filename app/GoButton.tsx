@@ -1,33 +1,21 @@
 "use client"
 
+import { useGoFetch } from "@/features/GoAuthProvider"
+
 import { Button } from "@/components/ui/button"
 
-function tellGoWhoWeAre(cookie: string) {
-  const GO_SERVER_URL =
-    process.env["NEXT_PUBLIC_GO_SERVER_URL"] ||
-    "http://no-go-server-url-was-provided"
+const GoButton = () => {
+  const { gofetch } = useGoFetch()
 
-  return async function () {
-    const res = await fetch(`${GO_SERVER_URL}/api/v1/pets`, {
-      headers: {
-        Authorization: `__next-auth-token__ ${cookie}`,
-      },
-    })
+  async function getPets() {
+    const res = await gofetch("/pets")
     const data = await res.json()
-    console.log("data --", data)
+    console.log(data)
   }
-}
-
-type GoButtonProps = {
-  cookie: string
-}
-
-const GoButton = (props: GoButtonProps) => {
-  const { cookie } = props
 
   return (
     <div>
-      <Button variant="secondary" onClick={tellGoWhoWeAre(cookie)}>
+      <Button variant="secondary" onClick={getPets}>
         Tell Go Who You Are
       </Button>
     </div>

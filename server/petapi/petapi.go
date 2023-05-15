@@ -71,5 +71,5 @@ func (p *petApi) GetPetsHandler(ctx *gin.Context) {
 	foundPets := []pet{}
 	result.All(context.Background(), &foundPets)
 
-	ctx.JSON(http.StatusCreated, gin.H{"msg": foundPets})
+	ctx.JSON(http.StatusOK, gin.H{"msg": foundPets})
 }

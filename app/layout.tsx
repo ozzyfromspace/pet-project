@@ -1,6 +1,9 @@
+import AuthProvider from "@/features/AuthProvider"
+import GoAuthProvider from "@/features/GoAuthProvider/GoAuthProvider"
+
 import "@/styles/globals.css"
 import { Metadata } from "next"
-import AuthProvider from "@/features/AuthProvider"
+import { headers } from "next/dist/client/components/headers"
 import { getServerSession } from "next-auth"
 
 import { siteConfig } from "@/config/site"
@@ -34,6 +37,7 @@ interface RootLayoutProps {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
   const session = await getServerSession(authOptions)
+  const cookie = headers().get("cookie") ?? ""
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -46,7 +50,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       >
         <AuthProvider session={session}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="mx-auto min-h-screen max-w-7xl">{children}</div>
+            <GoAuthProvider cookie={cookie}>
+              <div className="mx-auto min-h-screen max-w-7xl">{children}</div>
+            </GoAuthProvider>
             <TailwindIndicator />
           </ThemeProvider>
         </AuthProvider>

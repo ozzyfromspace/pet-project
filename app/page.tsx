@@ -1,4 +1,3 @@
-import { headers } from "next/dist/client/components/headers"
 import { redirect } from "next/navigation"
 import PetBarDashboard from "@/features/Dashboard/PetBarDashboard"
 import MainHeader from "@/features/MainHeader"
@@ -15,11 +14,9 @@ export default async function IndexPage() {
     redirect("/login?callbackUrl=/")
   }
 
-  const cookie = headers().get("cookie") ?? ""
-
   return (
     <section className="pt-5">
-      <GoButton cookie={cookie} />
+      <GoButton />
       <MainHeader />
       <PetBarDashboard pets={petBarMockData} />
     </section>
