@@ -1,14 +1,21 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/ozzyfromspace/pet-project/nextauth"
+	"github.com/ozzyfromspace/pet-project/server/database"
+	envloader "github.com/ozzyfromspace/pet-project/server/env_loader"
+	"github.com/ozzyfromspace/pet-project/server/nextauth"
 )
 
 func main() {
+	envloader.Loader().Load()
 	r := gin.Default()
+
+	db := database.NewDatabase()
+	db.Connect()
 
 	v1 := r.Group("/api/v1")
 
@@ -20,5 +27,5 @@ func main() {
 		ctx.JSON(http.StatusOK, gin.H{"data": session})
 	}).OPTIONS("/")
 
-	r.Run(":8080")
+	log.Fatal(r.Run(":8080"))
 }

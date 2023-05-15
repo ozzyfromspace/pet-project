@@ -11,7 +11,6 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 type NextAuthRequester struct {
@@ -29,10 +28,6 @@ type NextAuthSession struct {
 }
 
 func NewRequester() *NextAuthRequester {
-	if err := godotenv.Load(".env.local"); err != nil {
-		log.Fatal(err)
-	}
-
 	NEXTAUTH_URL := os.Getenv("NEXTAUTH_URL")
 
 	if NEXTAUTH_URL == "" {
