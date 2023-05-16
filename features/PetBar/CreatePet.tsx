@@ -20,6 +20,7 @@ import {
   GenderSelect,
 } from "../Dashboard/DashboardProfile"
 import { ServerPetProfile } from "../Dashboard/PetBarDashboard"
+import { useGoFetch } from "../GoAuthProvider"
 
 type InitialProfile = Omit<ServerPetProfile, "_id" | "imageData" | "owner">
 
@@ -35,6 +36,8 @@ export default function CreatePet() {
     defaultValues: serverPetProfileDefault,
   })
 
+  const { gofetch } = useGoFetch()
+
   const [date, setDate] = useState<Date | undefined>(() =>
     serverPetProfileDefault.birthdate
       ? new Date(serverPetProfileDefault.birthdate)
@@ -42,6 +45,21 @@ export default function CreatePet() {
   )
 
   const [gender, setGender] = useState<string | undefined>(() => undefined)
+
+  async function onSubmit(data: InitialProfile) {
+    const bodyObj = {
+      ...data,
+      birthdate: date?.toISOString() || "",
+      gender: gender || "Unknown",
+    }
+
+    const res = await gofetch("/pet", {
+      method: "POST",
+      body: JSON.stringify(bodyObj),
+    })
+    const sdata = await res.json()
+    console.log({ response: sdata })
+  }
 
   return (
     <Dialog>
@@ -61,7 +79,7 @@ export default function CreatePet() {
         </p>
       </div>
       <DialogContent className="sm:max-w-[425px]">
-        <form onSubmit={handleSubmit(onSubmit({ date, gender }))}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
             <DialogTitle>Create new pet</DialogTitle>
             <DialogDescription>
@@ -113,20 +131,4 @@ export default function CreatePet() {
       </DialogContent>
     </Dialog>
   )
-}
-
-type UnmonitoredProps = {
-  date: Date | undefined
-  gender: string | undefined
-}
-
-function onSubmit(props: UnmonitoredProps) {
-  return async function (data: InitialProfile) {
-    const _data = {
-      ...data,
-      birthdate: props?.date?.toISOString() || "",
-      gender: props?.gender || "Unknown",
-    }
-    console.log({ initialData: _data })
-  }
 }
