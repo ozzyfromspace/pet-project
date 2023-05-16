@@ -67,7 +67,7 @@ type DateInputProps = {
   id?: string
 }
 
-function DateInput(props: DateInputProps) {
+export function DateInput(props: DateInputProps) {
   const { timestamp, id } = props
   const [date, setDate] = useState<Date | undefined>(() =>
     timestamp ? new Date(timestamp) : undefined
@@ -85,7 +85,13 @@ function DateInput(props: DateInputProps) {
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
+          {date ? (
+            format(date, "PPP")
+          ) : (
+            <span className="flex cursor-pointer justify-between text-sm font-normal text-muted-foreground transition-colors duration-200 hover:text-gray-800 focus-visible:cursor-text focus-visible:text-gray-800 dark:hover:text-gray-50 dark:focus-visible:text-gray-50">
+              Pick a date
+            </span>
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
@@ -104,7 +110,7 @@ type GenderSelectProps = {
   id?: string
 }
 
-function GenderSelect(props: GenderSelectProps) {
+export function GenderSelect(props: GenderSelectProps) {
   const { id } = props
 
   return (
@@ -131,7 +137,7 @@ function GenderSelect(props: GenderSelectProps) {
   )
 }
 
-const DashboardProfileInput = forwardRef<HTMLInputElement, InputProps>(
+export const DashboardProfileInput = forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
     return (
       <Input
