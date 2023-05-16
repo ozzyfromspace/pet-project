@@ -1,9 +1,9 @@
-import { redirect } from "next/navigation"
 import PetBarDashboard, {
   ServerPetProfile,
 } from "@/features/Dashboard/PetBarDashboard"
 import MainHeader from "@/features/MainHeader"
 import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
 import goServerFetch from "@/lib/goServerfetch"
 

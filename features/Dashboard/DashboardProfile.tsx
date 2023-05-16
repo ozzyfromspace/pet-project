@@ -40,7 +40,9 @@ const DashboardProfile = (props: DashboardProfileProps) => {
     profile.birthdate ? new Date(profile.birthdate) : undefined
   )
 
-  const [gender, setGender] = useState<string | undefined>(() => undefined)
+  const [gender, setGender] = useState<string | undefined>(() =>
+    profile.gender?.toLowerCase()
+  )
 
   return (
     <form>
@@ -135,8 +137,8 @@ export function GenderSelect(props: GenderSelectProps) {
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Gender</SelectLabel>
-          <SelectItem value="Male">Male</SelectItem>
-          <SelectItem value="Female">Female</SelectItem>
+          <SelectItem value="male">Male</SelectItem>
+          <SelectItem value="female">Female</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
