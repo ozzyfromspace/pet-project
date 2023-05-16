@@ -40,6 +40,8 @@ const DashboardProfile = (props: DashboardProfileProps) => {
     profile.birthdate ? new Date(profile.birthdate) : undefined
   )
 
+  const [gender, setGender] = useState<string | undefined>(() => undefined)
+
   return (
     <form>
       <div className="grid grid-cols-[auto,1fr] gap-2">
@@ -54,7 +56,7 @@ const DashboardProfile = (props: DashboardProfileProps) => {
         <Label htmlFor="gender" className="flex items-center justify-end">
           Gender
         </Label>
-        <GenderSelect id="gender" />
+        <GenderSelect id="gender" gender={gender} setGender={setGender} />
         <Label htmlFor="species" className="flex items-center justify-end">
           Species
         </Label>
@@ -110,13 +112,15 @@ export function DateInput(props: DateInputProps) {
 
 type GenderSelectProps = {
   id?: string
+  gender: string | undefined
+  setGender: Dispatch<SetStateAction<string | undefined>>
 }
 
 export function GenderSelect(props: GenderSelectProps) {
-  const { id } = props
+  const { id, gender, setGender } = props
 
   return (
-    <Select>
+    <Select value={gender} onValueChange={setGender}>
       <SelectTrigger
         id={id}
         aria-label="Select a gender"
@@ -131,8 +135,8 @@ export function GenderSelect(props: GenderSelectProps) {
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Gender</SelectLabel>
-          <SelectItem value="apple">Male</SelectItem>
-          <SelectItem value="banana">Female</SelectItem>
+          <SelectItem value="Male">Male</SelectItem>
+          <SelectItem value="Female">Female</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

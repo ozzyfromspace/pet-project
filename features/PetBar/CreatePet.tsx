@@ -41,6 +41,8 @@ export default function CreatePet() {
       : undefined
   )
 
+  const [gender, setGender] = useState<string | undefined>(() => undefined)
+
   return (
     <Dialog>
       <div className="flex shrink-0 scale-[80%] flex-col items-center justify-start gap-1 transition-all duration-200 focus-visible:scale-90 min-[580px]:hover:scale-90">
@@ -59,7 +61,7 @@ export default function CreatePet() {
         </p>
       </div>
       <DialogContent className="sm:max-w-[425px]">
-        <form onSubmit={handleSubmit(onSubmit(date))}>
+        <form onSubmit={handleSubmit(onSubmit({ date, gender }))}>
           <DialogHeader>
             <DialogTitle>Create new pet</DialogTitle>
             <DialogDescription>
@@ -90,7 +92,7 @@ export default function CreatePet() {
               <Label htmlFor="gender" className="flex items-center justify-end">
                 Gender
               </Label>
-              <GenderSelect id="gender" />
+              <GenderSelect id="gender" gender={gender} setGender={setGender} />
               <Label
                 htmlFor="species"
                 className="flex items-center justify-end"
@@ -113,9 +115,18 @@ export default function CreatePet() {
   )
 }
 
-function onSubmit(date: Date | undefined) {
+type UnmonitoredProps = {
+  date: Date | undefined
+  gender: string | undefined
+}
+
+function onSubmit(props: UnmonitoredProps) {
   return async function (data: InitialProfile) {
-    const _data = { ...data, birthdate: date?.toISOString() || "" }
+    const _data = {
+      ...data,
+      birthdate: props?.date?.toISOString() || "",
+      gender: props?.gender || "Unknown",
+    }
     console.log({ initialData: _data })
   }
 }
