@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Plus } from "lucide-react"
 import { useForm } from "react-hook-form"
 
@@ -34,6 +35,12 @@ export default function CreatePet() {
     defaultValues: serverPetProfileDefault,
   })
 
+  const [date, setDate] = useState<Date | undefined>(() =>
+    serverPetProfileDefault.birthdate
+      ? new Date(serverPetProfileDefault.birthdate)
+      : undefined
+  )
+
   return (
     <Dialog>
       <div className="flex shrink-0 scale-[80%] flex-col items-center justify-start gap-1 transition-all duration-200 focus-visible:scale-90 min-[580px]:hover:scale-90">
@@ -52,7 +59,7 @@ export default function CreatePet() {
         </p>
       </div>
       <DialogContent className="sm:max-w-[425px]">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit(date))}>
           <DialogHeader>
             <DialogTitle>Create new pet</DialogTitle>
             <DialogDescription>
@@ -79,7 +86,7 @@ export default function CreatePet() {
               >
                 Birthdate
               </Label>
-              <DateInput id="birthdate" timestamp={""} />
+              <DateInput id="birthdate" date={date} setDate={setDate} />
               <Label htmlFor="gender" className="flex items-center justify-end">
                 Gender
               </Label>
@@ -106,6 +113,9 @@ export default function CreatePet() {
   )
 }
 
-async function onSubmit(data: InitialProfile) {
-  console.log({ initialData: data })
+function onSubmit(date: Date | undefined) {
+  return async function (data: InitialProfile) {
+    const _data = { ...data, birthdate: date?.toISOString() || "" }
+    console.log({ initialData: _data })
+  }
 }

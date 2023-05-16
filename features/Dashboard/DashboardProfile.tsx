@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react"
+import { Dispatch, SetStateAction, forwardRef, useState } from "react"
 import { format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -36,6 +36,10 @@ const DashboardProfile = (props: DashboardProfileProps) => {
     defaultValues: profile,
   })
 
+  const [date, setDate] = useState<Date | undefined>(() =>
+    profile.birthdate ? new Date(profile.birthdate) : undefined
+  )
+
   return (
     <form>
       <div className="grid grid-cols-[auto,1fr] gap-2">
@@ -46,7 +50,7 @@ const DashboardProfile = (props: DashboardProfileProps) => {
         <Label htmlFor="birthdate" className="flex items-center justify-end">
           Birthdate
         </Label>
-        <DateInput id="birthdate" timestamp={profile.birthdate} />
+        <DateInput id="birthdate" date={date} setDate={setDate} />
         <Label htmlFor="gender" className="flex items-center justify-end">
           Gender
         </Label>
@@ -62,16 +66,14 @@ const DashboardProfile = (props: DashboardProfileProps) => {
 
 export default DashboardProfile
 
-type DateInputProps = {
-  timestamp: string
+interface DateInputProps {
   id?: string
+  date?: Date | undefined
+  setDate?: Dispatch<SetStateAction<Date | undefined>>
 }
 
 export function DateInput(props: DateInputProps) {
-  const { timestamp, id } = props
-  const [date, setDate] = useState<Date | undefined>(() =>
-    timestamp ? new Date(timestamp) : undefined
-  )
+  const { id, date, setDate } = props
 
   return (
     <Popover>
